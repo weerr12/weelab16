@@ -1,24 +1,32 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-int main(){
-    int a= 5;
-    char b='A';
-    char &c = b;
-    int *x= &a;
-	char *y= &b;
-	int **z= &x;
-	cout << a << " " << b << " " << c << " " << x << " " << (void *)y << " " << z << "\n";
-	cout << &a <<" " << (void *)&b << " " << (void *)&c << " " << &x << " " << (void *)&y << " " << &z << "\n";
-    b ='F';
-	cout << a <<" " << b << " " << c << " " << x << " " << (void *)y << " " << z << "\n";
-	*y='W';
-	cout << a <<" " << b << " " << c << " " << x << " " << (void *)y << " " << z << "\n";
-	*x=6;
-	cout << a <<" " << b << " " << c << " " << x << " " << (void *)y << " " << z << "\n";
-	**z=7;
-	cout << a <<" " << b << " " << c << " " << x << " " << (void *)y << " " << z << "\n";
+void shuffle(int *,int *,int *,int *);
 
+int main(){
+	int a = 50, b = 100, c = 500, d = 1000;
+	
+	srand(time(0));	
+	
+	for(int i = 0;i < 10;i++){
+	    shuffle(&a,&b,&c,&d);
+	    cout << a << " " << b << " " << c << " " << d << "\n";
+	}
 	
 	return 0;
+}
+void shuffle(int *x,int *y,int *z,int *j){
+	int i[]={*x,*y,*z,*j};
+	int l = rand()%4;
+	int m = rand()%4;
+	
+	int n =i[l];
+	i[l]=i[m];
+	i[m]=n;
+	*x=i[0];
+	*y=i[1];
+	*z=i[2];
+	*j=i[3];
 }
